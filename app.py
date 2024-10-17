@@ -14,7 +14,9 @@ line_bot_api = LineBotApi('KPmIJHzvRdy4zg8SwwYmLPoMmD+t47r25eXLoxQcuVsrYadFmFAhd
 handler = WebhookHandler('d2cafc2d4e340f2928f994e2fcfc315a')
 
 # Google Drive API 配置
-credentials = service_account.Credentials.from_service_account_file('credentials.json')
+credentials_json = os.environ['GOOGLE_APPLICATION_CREDENTIALS']
+credentials_info = json.loads(credentials_json)
+credentials = service_account.Credentials.from_service_account_info(credentials_info)
 drive_service = build('drive', 'v3', credentials=credentials)
 
 # 上传文件到 Google Drive
